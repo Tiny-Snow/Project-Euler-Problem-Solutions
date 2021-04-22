@@ -53,7 +53,7 @@ for row in range(n):
 
 #========================================================================开始执行Dijkstra算法
 def Dijkstra(node_list: list) -> dict:
-    dijkstra_dict = {}.fromkeys(node_list, 'infinity')
+    dijkstra_dict = {}.fromkeys(node_list, float('inf'))
     defined_dict = {}
     node_num = len(node_list)
 
@@ -66,7 +66,7 @@ def Dijkstra(node_list: list) -> dict:
     while len(dijkstra_dict) > 0:
         no_infinity_dict = {}
         for node in dijkstra_dict:
-            if dijkstra_dict[node] != 'infinity':
+            if dijkstra_dict[node] != float('inf'):
                 no_infinity_dict[node] = dijkstra_dict[node]
         min_value = min(no_infinity_dict.values())
         for node in no_infinity_dict:
@@ -75,7 +75,7 @@ def Dijkstra(node_list: list) -> dict:
         defined_dict[min_node] = dijkstra_dict[min_node]
         for child in min_node._child_node:
             if child in dijkstra_dict:
-                if dijkstra_dict[child] == 'infinity':
+                if dijkstra_dict[child] == float('inf'):
                     dijkstra_dict[child] = defined_dict[min_node] + child._value
                 else:
                     dijkstra_dict[child] = min(dijkstra_dict[child], defined_dict[min_node] + child._value)
